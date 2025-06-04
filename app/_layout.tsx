@@ -1,10 +1,14 @@
 import { Stack } from "expo-router";
-import React from "react";
+import React, { useEffect } from "react";
 
 const RootLayout = () => {
   if (__DEV__) {
     require("../ReactotronConfig");
   }
+
+  useEffect(() => {
+    console.log("hello");
+  }, []);
 
   return (
     <Stack>

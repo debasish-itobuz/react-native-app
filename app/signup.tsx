@@ -1,12 +1,12 @@
-import MyButton from "@/components/MyButton";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Image, Text, TextInput, View } from "react-native";
+import MyButton from "../components/MyButton";
 
 const SignUp = () => {
   const router = useRouter();
   const onRegister = () => {
-    router.navigate("/login");
+    router.navigate("/home");
   };
   return (
     <View style={{ flex: 1 }}>
