@@ -1,10 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "expo-router";
 import React from "react";
-import {Controller, useForm} from "react-hook-form";
-import {
-  View,Text, TextInput, Image, StyleSheet,Pressable,
-} from "react-native";
+import { Controller, useForm } from "react-hook-form";
+import {View,Text,TextInput,Image,StyleSheet,Pressable} from "react-native";
 import MyButton from "../components/MyButton";
 import signupSchema from "../validation/SignUpValidator";
 
@@ -56,7 +54,7 @@ const SignUp = () => {
             />
           )}
         />
-        {errors.name && <Text style={styles.error}>{errors.name.message}</Text>}
+        <Text style={styles.error}>{errors.name?.message ?? " "}</Text>
 
         <Text style={styles.label}>Email</Text>
         <Controller
@@ -71,7 +69,7 @@ const SignUp = () => {
             />
           )}
         />
-        {errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
+        <Text style={styles.error}>{errors.email?.message ?? " "}</Text>
 
         <Text style={styles.label}>Password</Text>
         <Controller
@@ -87,7 +85,7 @@ const SignUp = () => {
             />
           )}
         />
-        {errors.password && <Text style={styles.error}>{errors.password.message}</Text>}
+        <Text style={styles.error}>{errors.password?.message ?? " "}</Text>
 
         <Text style={styles.label}>Confirm Password</Text>
         <Controller
@@ -103,9 +101,7 @@ const SignUp = () => {
             />
           )}
         />
-        {errors.confirmPassword && (
-          <Text style={styles.error}>{errors.confirmPassword.message}</Text>
-        )}
+        <Text style={styles.error}>{errors.confirmPassword?.message ?? " "}</Text>
 
         <MyButton title="Register" onPress={handleSubmit(onRegister)} />
 
@@ -133,6 +129,8 @@ const styles = StyleSheet.create({
   },
   error: {
     color: "red",
+    fontSize: 14,
+    height: 15, // reserve vertical space to avoid layout shift
     marginBottom: 5,
   },
   bottomContainer: {
@@ -151,4 +149,3 @@ const styles = StyleSheet.create({
 });
 
 export default SignUp;
-

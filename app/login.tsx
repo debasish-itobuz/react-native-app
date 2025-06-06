@@ -1,9 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "expo-router";
 import React from "react";
-import {Controller,useForm} from "react-hook-form";
-import { Image, StyleSheet, Text, TextInput, View, Pressable,
-} from "react-native";
+import { Controller, useForm } from "react-hook-form";
+import { Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import MyButton from "../components/MyButton";
 import loginSchema from "../validation/LoginValidator";
 
@@ -15,7 +14,10 @@ export interface LoginFormData {
 const Login = () => {
   const router = useRouter();
 
-  const { control, handleSubmit,formState: { errors },
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
   } = useForm<LoginFormData>({
     resolver: yupResolver(loginSchema),
   });
@@ -50,9 +52,8 @@ const Login = () => {
             />
           )}
         />
-        {errors.email && (
-          <Text style={styles.error}>{errors.email.message}</Text>
-        )}
+        {/* Always render error block to prevent layout shift */}
+        <Text style={styles.error}>{errors.email?.message ?? " "}</Text>
 
         <Text style={styles.label}>Password</Text>
         <Controller
@@ -68,9 +69,7 @@ const Login = () => {
             />
           )}
         />
-        {errors.password && (
-          <Text style={styles.error}>{errors.password.message}</Text>
-        )}
+        <Text style={styles.error}>{errors.password?.message ?? " "}</Text>
 
         <MyButton title="Login" onPress={handleSubmit(onLogin)} />
 
@@ -98,7 +97,8 @@ const styles = StyleSheet.create({
   },
   error: {
     color: "red",
-    marginBottom: 5,
+    height: 15, // Reserve space for error messages
+    fontSize: 14,
   },
   bottomContainer: {
     flexDirection: "row",
